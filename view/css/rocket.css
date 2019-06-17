@@ -1,0 +1,13 @@
+.panell{
+    border-color: beige;
+    border-style: solid;
+    display: inline-block;
+    margin-left: 8%;
+}
+body{
+    background-image: url(https://www.iliketowastemytime.com/sites/default/files/outer-space-hd-wallpaper.jpg);
+    color: beige;
+}
+h1{
+    color: beige;
+}

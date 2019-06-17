@@ -1,0 +1,33 @@
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="css/rocket.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <div class="mt-4 p-4 panell" >
+                <h1 class="center pb-3">Rockets!</h1>
+                <button onclick="creater1()">Create rocket 1</button>
+                <button class ="mb-2" onclick="creater2()">Create rocket 2</button><br>
+                <label id="textrocket"></label><br>
+                <button onclick="accelerarr1()">Accelerate rocket 1</button>
+                <button onclick="accelerarr2()">Accelerate rocket 2</button>
+                <button onclick="stopr1()">Break rocket 1</button>
+                <button class ="mb-1" onclick="stopr2()">Break rocket 2</button><br>
+                <label id="rocket1f3"></label><br>
+                <label id="rocket2f3"></label><br>
+                <button onclick="printr1()">Print rocket 1 info</button>
+                <button onclick="printr2()">Print rocket 2 info</button>
+                <button class ="mb-1" onclick="printall()">Print all rockets</button><br>
+                <label id="rocket1f1"></label><br>
+                <label id="rocket2f1"></label>
+        </div>
+    </div>
+    <script src="../model/rocket.js"></script>
+    <script src="../model/thruster.js"></script>
+    <script src="../controller/controller.js"></script>
+</body>
