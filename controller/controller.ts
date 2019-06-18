@@ -1,104 +1,118 @@
-
-var r1: Rocket = new Rocket("", 0);
-var r2: Rocket = new Rocket("", 0);
-let cr1: boolean = false;
-let cr2: boolean = false;
-
-function creater1() {
-    r1 = new Rocket("32WESSDS", 0);
-
-    r1.addThruster(new Thruster(10));
-    r1.addThruster(new Thruster(30));
-    r1.addThruster(new Thruster(80));
-
-    let rocktext = document.getElementById('textrocket') as HTMLInputElement;
-    rocktext.innerHTML = "Rocket 1 created!";
-    cr1 = true;
-}
-
-function creater2() {
-    r2 = new Rocket("LDSFJA32", 0);
-
-    r2.addThruster(new Thruster(30));
-    r2.addThruster(new Thruster(40));
-    r2.addThruster(new Thruster(50));
-    r2.addThruster(new Thruster(50));
-    r2.addThruster(new Thruster(30));
-    r2.addThruster(new Thruster(10));
-
-    let rocktext = document.getElementById('textrocket') as HTMLInputElement;
-    rocktext.innerHTML = "Rocket 2 created!";
-    cr2 = true;
-}
-
+var rockets: any = [];
 let rock1f3 = document.getElementById('rocket1f3') as HTMLInputElement;
 let rock2f3 = document.getElementById('rocket2f3') as HTMLInputElement;
 let rock1f1 = document.getElementById('rocket1f1') as HTMLInputElement;
 let rock2f1 = document.getElementById('rocket2f1') as HTMLInputElement;
 
+function create_rocket(coder: string) {
 
-function accelerarr1() {
-    if (cr1 == false) {
-        rock1f3.innerHTML = "First you have to create rocket 1.";
-    } else {
-        r1.accel();
-        rock1f3.innerHTML = "Velocitat R1: " + r1.speed;
+    let rocktext = document.getElementById('textrocket') as HTMLInputElement;
+
+    let r = new Rocket(coder, 0);
+    let listthr = new Array();
+    if (coder == '32WESSDS') {
+        listthr = new Array(10, 30, 80);
+        rocktext.innerHTML = "Rocket 1 created!";
+    } else if (coder == 'LDSFJA32') {
+        listthr = new Array(30, 40, 50, 50, 30, 10);
+        rocktext.innerHTML = "Rocket 2 created!";
+    }
+
+    listthr.forEach(thr => {
+        r.addThruster(new Thruster(thr));
+    });
+
+    rockets.push(r);
+}
+
+function find_rocket(coder: string) {
+
+    for (let i = 0; i < rockets.length; i++) {
+        if (rockets[i].code == coder) return i;
+    }
+    return -1;
+}
+
+function accelerar(coder: string) {
+    let e = find_rocket(coder);
+
+    if (coder == '32WESSDS') {
+        if (e == -1) {
+            rock1f3.innerHTML = "First you have to create rocket 1.";
+        } else {
+            rockets[e].accel();
+            rock1f3.innerHTML = "Velocitat R1: " + rockets[e].speed;
+        }
+    }
+    else if (coder == 'LDSFJA32') {
+        if (e == -1) {
+            rock2f3.innerHTML = "First you have to create rocket 2.";
+        } else {
+            rockets[e].accel();
+            rock2f3.innerHTML = "Velocitat R2: " + rockets[e].speed;
+        }
     }
 }
 
-function accelerarr2() {
-    if (cr2 == false) {
-        rock2f3.innerHTML = "First you have to create rocket 2.";
-    } else {
-        r2.accel();
-        rock2f3.innerHTML = "Velocitat R2: " + r2.speed;
+function stop(coder: string) {
+    let e = find_rocket(coder);
+
+    if (coder == '32WESSDS') {
+        if (e == -1) {
+            rock1f3.innerHTML = "First you have to create rocket 1.";
+        } else {
+            rockets[e].stop();
+            rock1f3.innerHTML = "Velocitat R1: " + rockets[e].speed;
+        }
+    }
+    else if (coder == 'LDSFJA32') {
+        if (e == -1) {
+            rock2f3.innerHTML = "First you have to create rocket 2.";
+        } else {
+            rockets[e].stop();
+            rock2f3.innerHTML = "Velocitat R2: " + rockets[e].speed;
+        }
     }
 }
 
-function stopr1() {
-    if (cr1 == false) {
-        rock1f3.innerHTML = "First you have to create rocket 1.";
-    } else {
-        r1.stop();
-        rock1f3.innerHTML = "Velocitat R1: " + r1.speed;
+function print(coder: string) {
+    let e = find_rocket(coder);
+
+    if (coder == '32WESSDS') {
+        if (e == -1) {
+            rock1f1.innerHTML = "First you have to create rocket 1.";
+        } else {
+            rock1f1.innerHTML = "Rocket " + rockets[e].code + " boosters max power: ";
+            for (let i = 0; i < rockets[e].thrusters.length; i++) {
+                if(rockets[e].thrusters.length-1==i){
+                    rock1f1.innerHTML +=rockets[e].thrusters[i].power;
+                }else{
+                rock1f1.innerHTML += rockets[e].thrusters[i].power + ",";
+                }
+            }
+        }
+    }
+    else if (coder == 'LDSFJA32') {
+        if (e == -1) {
+            rock2f1.innerHTML = "First you have to create rocket 2.";
+        } else {
+            rock2f1.innerHTML = "Rocket " + rockets[e].code + " boosters max power: ";
+
+            for (let i = 0; i < rockets[e].thrusters.length; i++) {
+                if(rockets[e].thrusters.length-1==i){
+                    rock2f1.innerHTML +=rockets[e].thrusters[i].power;
+                }else{
+                    rock2f1.innerHTML += rockets[e].thrusters[i].power + ",";
+                }
+            }
+        }
+    }
+    else if (coder == 'all') {
+        print('32WESSDS');
+        print('LDSFJA32');
     }
 }
 
-function stopr2() {
-    if (cr2 == false) {
-        rock2f3.innerHTML = "First you have to create rocket 2.";
-    } else {
-        r2.stop();
-        rock2f3.innerHTML = "Velocitat R2: " + r2.speed;
-    }
-}
-
-function printr1() {
-    if (cr1 == false) {
-        rock1f1.innerHTML = "First you have to create rocket 1.";
-    } else {
-        rock1f1.innerHTML = "Rocket " + r1.code + " boosters max power: " + r1.thrusters[0].power + "," + r1.thrusters[1].power + "," + r1.thrusters[2].power;
-    }
-}
-
-function printr2() {
-    if (cr2 == false) {
-        rock2f1.innerHTML = "First you have to create rocket 2.";
-    } else {
-        rock2f1.innerHTML = "Rocket " + r2.code + " boosters max power: " + r2.thrusters[0].power + "," + r2.thrusters[1].power + "," + r2.thrusters[2].power
-            + "," + r2.thrusters[3].power + "," + r2.thrusters[4].power + "," + r2.thrusters[5].power;
-    }
-}
-
-function printall() {
-    if (cr1 == false || cr2 == false) {
-        rock1f1.innerHTML = "First you have to create both rockets.";
-    } else {
-        rock1f1.innerHTML = "Rocket " + r1.code + " boosters max power: " + r1.thrusters[0].power + "," + r1.thrusters[1].power + "," + r1.thrusters[2].power;
-        rock2f1.innerHTML = "Rocket " + r2.code + " boosters max power: " + r2.thrusters[0].power + "," + r2.thrusters[1].power + "," + r2.thrusters[2].power
-            + "," + r2.thrusters[3].power + "," + r2.thrusters[4].power + "," + r2.thrusters[5].power;
-    }
-}
 
 
 
