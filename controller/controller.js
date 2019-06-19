@@ -53,7 +53,7 @@ function accelerar(coder) {
         }
     }
 }
-function stop(coder) {
+function stopr(coder) {
     var e = find_rocket(coder);
     if (coder == '32WESSDS') {
         if (e == -1) {

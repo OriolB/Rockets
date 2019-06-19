@@ -58,7 +58,7 @@ function accelerar(coder: string) {
     }
 }
 
-function stop(coder: string) {
+function stopr(coder: string) {
     let e = find_rocket(coder);
 
     if (coder == '32WESSDS') {
