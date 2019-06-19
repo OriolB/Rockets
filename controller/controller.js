@@ -6,15 +6,19 @@ var rock1f1 = document.getElementById('rocket1f1');
 var rock2f1 = document.getElementById('rocket2f1');
 function create_rocket(coder) {
     var rocktext = document.getElementById('textrocket');
+    var c1 = document.getElementById("rocket1");
+    var c2 = document.getElementById("rocket2");
     var r = new Rocket(coder, 0);
     var listthr = new Array();
     if (coder == '32WESSDS') {
         listthr = new Array(10, 30, 80);
         rocktext.innerHTML = "Rocket 1 created!";
+        c1.style.display = "inline-block";
     }
     else if (coder == 'LDSFJA32') {
         listthr = new Array(30, 40, 50, 50, 30, 10);
         rocktext.innerHTML = "Rocket 2 created!";
+        c2.style.display = "inline-block";
     }
     listthr.forEach(function (thr) {
         r.addThruster(new Thruster(thr));
